@@ -50,7 +50,11 @@ void Map::LoadMap(const char *filename)
 	ifstream openfile (filename);
 	if (openfile.is_open())
 	{
-		openfile >> mapSizeX >> mapSizeY;
+		getline(openfile, line);
+		line.erase( remove( line.begin(), line.end(), ' '), line.end() );
+		mapSizeX = line.length();
+		openfile.seekg(0, ios::beg);
+		mapSizeY = 0;
 		while(!openfile.eof())
 		{
 			openfile >> MapFile[loadCounterX][loadCounterY];
@@ -60,6 +64,7 @@ void Map::LoadMap(const char *filename)
 			{
 				loadCounterX = 0;
 				loadCounterY ++;
+				mapSizeY ++;
 			}
 		}
 		loadCounterX = loadCounterY = 0;

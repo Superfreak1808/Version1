@@ -3,6 +3,8 @@
 
 #include <allegro.h>
 #include <fstream>
+#include <string>
+#include <algorithm>
 #include "global.h"
 #include "Player.h"
 
@@ -16,6 +18,8 @@ private:
 	int mapSizeX;
 	int mapSizeY;
 	int ColMapFile[100][100];
+	string line;
+
 public:
 	Collision();
 	~Collision();
