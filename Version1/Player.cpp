@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "global.h"
 
 
 Player::Player()
@@ -13,10 +14,12 @@ Player::~Player()
 
 void Player::Init()
 {
-	x = 10;
-	y = 10;
 	width = 10;
 	height = 10;
+	x = 10;
+	y = (ScreenHeight - width)/2;
+	origX = x;
+	origY = y;
 	velx = 0;
 	vely = 0;
 	x2 = x + 10;

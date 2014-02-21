@@ -15,12 +15,15 @@ Collision::~Collision()
 void Collision::Init()
 {
 	loadCounterX = loadCounterY = 0;
-	Collision::LoadCollisionMap("colmap1.txt");
+	Collision::LoadCollisionMap("colmap1.txt", 0);
+	Collision::LoadCollisionMap("colmap2.txt", 1);
+	Collision::LoadCollisionMap("colmap3.txt", 2);
 }
 
-void Collision::Update(BITMAP *Buffer, Player &player)
+void Collision::Update(BITMAP *Buffer, Player &player, Map &map)
 {
-	Collision::PlatformCollision(Buffer, player);
+	Collision::PlatformCollision(Buffer, player, map);
+	Collision::LevelEnd(player, map);
 
 }
 
@@ -29,7 +32,7 @@ void Collision::Draw(BITMAP *Buffer)
 
 }
 
-void Collision::LoadCollisionMap(const char *filename)
+void Collision::LoadCollisionMap(const char *filename, int level)
 {
 	ifstream openfile(filename);
 	if(openfile.is_open())
@@ -41,7 +44,7 @@ void Collision::LoadCollisionMap(const char *filename)
 		mapSizeY = 0;
 		while(!openfile.eof())
 		{
-			openfile >> ColMapFile[loadCounterX][loadCounterY];
+			openfile >> ColMapFile[level][loadCounterX][loadCounterY];
 			loadCounterX ++;
 			if(loadCounterX >= mapSizeX)
 			{
@@ -58,13 +61,13 @@ void Collision::LoadCollisionMap(const char *filename)
 	}
 }
 
-void Collision::PlatformCollision(BITMAP *Buffer, Player &player)
+void Collision::PlatformCollision(BITMAP *Buffer, Player &player, Map &map)
 {
 	for(int i = 0; i < mapSizeX; i++)
 	{
 		for(int j = 0; j < mapSizeY; j++)
 		{
-			if(ColMapFile[i][j] == 1)
+			if(ColMapFile[map.getLevel()][i][j] == 1)
 			{
 				if(player.x > i*BlockSize + BlockSize || player.y > j*BlockSize + BlockSize || player.x2 < i*BlockSize || player.y2 < j*BlockSize)
 				{
@@ -99,6 +102,38 @@ void Collision::PlatformCollision(BITMAP *Buffer, Player &player)
 						player.x += player.speed;
 						player.x2 = player.x+10;
 					}
+				}
+			}
+		}
+	}
+}
+
+void Collision::LevelEnd(Player &player, Map &map)
+{
+	for(int i = 0; i < mapSizeX; i++)
+	{
+		for(int j = 0; j < mapSizeY; j++)
+		{
+			if(ColMapFile[map.getLevel()][i][j] == 2)
+			{
+				if(player.x > i*BlockSize + BlockSize || player.y > j*BlockSize + BlockSize || player.x2 < i*BlockSize || player.y2 < j*BlockSize)
+				{
+					//No Collsion
+					player.Platform = false;
+				}
+				else
+				{
+					int level = map.getLevel();
+					level ++;
+					map.setLevel(level);
+					if(level >2)
+					{
+						map.setLevel(0);
+					}
+					player.x = player.origX;
+					player.y = player.origY;
+					clear_to_color(screen, makecol(0,0,0));
+					rest(1000);
 				}
 			}
 		}

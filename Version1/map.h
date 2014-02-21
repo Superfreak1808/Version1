@@ -18,13 +18,16 @@ public:
 	void Init();
 	void Update();
 	void Draw(BITMAP *Buffer);
-	void LoadMap(const char*filename);
+	void LoadMap(const char*filename, int level);
+	int getLevel();
+	void setLevel(int value);
 
 private:
 
 	int loadCounterX, loadCounterY;
 	int mapSizeX, mapSizeY;
-	int MapFile[100][100];
+	int MapFile[3][100][100];
+	int level;
 	string line;
 
 };

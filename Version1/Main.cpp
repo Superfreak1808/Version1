@@ -1,9 +1,14 @@
 #include <allegro.h>
+#include <iostream>
+#include <ctime>
+#include "enemy.h"
 #include "Player.h"
 #include "global.h"
 #include "camera.h"
 #include "map.h"
 #include "Collision.h"
+
+using namespace std;
 
 volatile long counter = 0;
 
@@ -25,14 +30,18 @@ int main(){
 
 	install_int_ex(Increment, BPS_TO_TIMER(100));
 
+	srand(time(0));
+
 	Player player;
 	Camera camera;
 	Map map;
 	Collision collision;
+	Enemy enemy;
 
 	player.Init();
 	camera.Init();
 	map.Init();
+	enemy.Init();
 	collision.Init();
 
 	BITMAP *Buffer = create_bitmap (6000, 600);
@@ -51,7 +60,8 @@ int main(){
 			//Update
 			map.Update();
 			player.Update();
-			collision.Update(Buffer, player);
+			enemy.Update(map.getLevel());
+			collision.Update(Buffer, player, map);
 			camera.Update(player.x, player.y);
 			counter --;
 		}
@@ -59,6 +69,7 @@ int main(){
 		//Draw
 		map.Draw(Buffer);
 		player.Draw(Buffer);
+		enemy.Draw(Buffer, map.getLevel());
 		camera.Draw(Buffer);
 		clear_bitmap(Buffer);
 	}

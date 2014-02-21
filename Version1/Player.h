@@ -21,6 +21,7 @@ public:
 
 	int x;
 	int y;
+	int origX, origY;
 	int x2, y2;
 	int width, height;
 	int hDir, vDir;
