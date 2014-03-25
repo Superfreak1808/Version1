@@ -9,7 +9,7 @@ public:
 
 	void Init();
 	void Update(int x, int y);
-	void Draw(BITMAP *buffer);
+	void Draw(BITMAP *Buffer);
 
 	void SetPosition(int x, int y);
 

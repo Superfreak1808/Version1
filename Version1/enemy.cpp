@@ -133,3 +133,28 @@ void Enemy::Move(int level)
         }
     }
 }
+
+int Enemy::getAmountOfEnemies()
+{
+	return amountOfEnemies;
+}
+
+int Enemy::getX(int index)
+{
+	return x[index];
+}
+
+int Enemy::getY(int index)
+{
+	return y[index];
+}
+
+int Enemy::getX2(int index)
+{
+	return x[index] + width[index];
+}
+
+int Enemy::getY2(int index)
+{
+	return y[index] + height[index];
+}

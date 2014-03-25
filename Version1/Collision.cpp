@@ -20,9 +20,10 @@ void Collision::Init()
 	Collision::LoadCollisionMap("colmap3.txt", 2);
 }
 
-void Collision::Update(BITMAP *Buffer, Player &player, Map &map)
+void Collision::Update(BITMAP *Buffer, Player &player, Enemy &enemy, Map &map)
 {
 	Collision::PlatformCollision(Buffer, player, map);
+	Collision::EPCollision(player, enemy);
 	Collision::LevelEnd(player, map);
 
 }
@@ -105,6 +106,22 @@ void Collision::PlatformCollision(BITMAP *Buffer, Player &player, Map &map)
 				}
 			}
 		}
+	}
+}
+
+void Collision::EPCollision(Player &player, Enemy &enemy)
+{
+	for(int i = 0; i < enemy.getAmountOfEnemies(); i++)
+	{
+			if(player.x > enemy.getX2(i) || player.y > enemy.getY2(i) || player.x2 < enemy.getX(i) || player.y2 < enemy.getY(i))
+			{
+				// No Collision
+			}
+			else 
+			{
+				// Player Dies(loses a life)
+				player.lives --;
+			}
 	}
 }
 

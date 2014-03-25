@@ -31,6 +31,7 @@ public:
 	int vely;
 	int speed;
 	int jumpspeed;
+	int lives;
 
 
 

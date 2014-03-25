@@ -14,6 +14,7 @@ Player::~Player()
 
 void Player::Init()
 {
+	lives = 3;
 	width = 10;
 	height = 10;
 	x = 10;

@@ -31,6 +31,12 @@ public:
 
 	void LoadEnemies(const char*filename);
 	void Move(int level);
+
+	int getAmountOfEnemies();
+	int getX(int index);
+	int getY(int index);
+	int getX2(int index);
+	int getY2(int index);
 };
 
 #endif

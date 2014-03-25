@@ -2,12 +2,14 @@
 #define COLLISION_H
 
 #include <allegro.h>
-#include <fstream>
-#include <string>
+#include <fstream> 
+#include <sstream>
+#include <string> 
 #include <algorithm>
-#include "global.h"
+#include "Global.h"
 #include "Player.h"
-#include "map.h"
+#include "Map.h"
+#include "Enemy.h"
 
 using namespace std;
 
@@ -26,12 +28,13 @@ public:
 	~Collision();
 
 	void Init();
-	void Update(BITMAP *Buffer, Player &player, Map &map);
+	void Update(BITMAP *Buffer, Player &player, Enemy &enemy, Map &map);
 	void Draw(BITMAP *Buffer);
 
 	void LoadCollisionMap(const char*filename, int level);
 	void LevelEnd(Player &player, Map &map);
 	void PlatformCollision(BITMAP *Buffer, Player &player, Map &map);
+	void EPCollision(Player &player, Enemy &enemy);
 
 };
 
