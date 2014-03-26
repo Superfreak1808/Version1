@@ -1,5 +1,6 @@
 #include <allegro.h>
 #include <iostream>
+#include <sstream>
 #include <ctime>
 #include "enemy.h"
 #include "Player.h"
@@ -61,8 +62,8 @@ int main(){
 			map.Update();
 			player.Update();
 			enemy.Update(map.getLevel());
-			collision.Update(Buffer, player, map);
-			camera.Update(player.x, player.y);
+			collision.Update(Buffer, player, enemy, map);
+			camera.Update(player.getX(), player.getY());
 			counter --;
 		}
 

@@ -23,7 +23,7 @@ void Collision::Init()
 void Collision::Update(BITMAP *Buffer, Player &player, Enemy &enemy, Map &map)
 {
 	Collision::PlatformCollision(Buffer, player, map);
-	Collision::EPCollision(player, enemy);
+	Collision::EPCollision(player, enemy, map);
 	Collision::LevelEnd(player, map);
 
 }
@@ -70,38 +70,38 @@ void Collision::PlatformCollision(BITMAP *Buffer, Player &player, Map &map)
 		{
 			if(ColMapFile[map.getLevel()][i][j] == 1)
 			{
-				if(player.x > i*BlockSize + BlockSize || player.y > j*BlockSize + BlockSize || player.x2 < i*BlockSize || player.y2 < j*BlockSize)
+				if(player.getX() > i*BlockSize + BlockSize || player.getY() > j*BlockSize + BlockSize || player.getX2() < i*BlockSize || player.getY2() < j*BlockSize)
 				{
 					//No Collsion
-					player.Platform = false;
+					player.setPlatform(false);
 				}
 				else
 				{
-					if(player.vDir == 2 && player.y - player.vely <= j*BlockSize)
+					if(player.getVDirection() == 2 && player.getY() - player.getVelY() <= j*BlockSize)
 					{
-						player.y = j*BlockSize - 10;
-						player.y2 = player.y + 10;
-						player.vely = 0;
-						player.Platform = true;
-						player.Jump = true;
+						player.setY(j*BlockSize - 10);
+						player.setY2(player.getY() + 10);
+						player.setVelY(0);
+						player.setPlatform(true);
+						player.setJump(true);
 					}
-					else if(player.vDir == 1)
+					else if (player.getVDirection() == 1)
 					{
-						player.y += player.speed*2;
-						player.y2 = player.y+10;
-						player.vely = 0;
-						player.Platform = false;
-						player.Jump = false;
+						player.setY(player.getY() + player.getSpeed()*2);
+						player.setY2(player.getY() + 10); 
+						player.setVelY(0); 
+						player.setPlatform(false);
+						player.setJump(false);
 					}
-					if(player.hDir == 1 && player.Platform == false)
+					if (player.getHDirection() == 1 && player.getPlatform() == false)
 					{
-						player.x -= player.speed;
-						player.x2 = player.x+10;
+						player.setX(player.getX() - player.getSpeed()); 
+						player.setX2(player.getX() + 10); 
 					}
-					else if(player.hDir == 2 && player.Platform == false)
+					else if (player.getHDirection() == 2 && player.getPlatform() == false)
 					{
-						player.x += player.speed;
-						player.x2 = player.x+10;
+						player.setX(player.getX() + player.getSpeed()); 
+						player.setX2(player.getX() + 10);
 					}
 				}
 			}
@@ -109,47 +109,50 @@ void Collision::PlatformCollision(BITMAP *Buffer, Player &player, Map &map)
 	}
 }
 
-void Collision::EPCollision(Player &player, Enemy &enemy)
+void Collision::EPCollision(Player &player, Enemy &enemy, Map& map)
 {
 	for(int i = 0; i < enemy.getAmountOfEnemies(); i++)
 	{
-			if(player.x > enemy.getX2(i) || player.y > enemy.getY2(i) || player.x2 < enemy.getX(i) || player.y2 < enemy.getY(i))
+		if(enemy.getLevel(i) == map.getLevel())
+		{
+			if(player.getX() > enemy.getX2(i) || player.getY() > enemy.getY2(i) || player.getX2() < enemy.getX(i) || player.getY2() < enemy.getY(i))
 			{
 				// No Collision
 			}
 			else 
 			{
 				// Player Dies(loses a life)
-				player.lives --;
+				player.setLives(player.getLives()-1);
 			}
+		}
 	}
 }
 
 void Collision::LevelEnd(Player &player, Map &map)
 {
-	for(int i = 0; i < mapSizeX; i++)
+	for (int i = 0; i < mapSizeX; i++)
 	{
-		for(int j = 0; j < mapSizeY; j++)
+		for (int j = 0; j < mapSizeY; j++)
 		{
 			if(ColMapFile[map.getLevel()][i][j] == 2)
 			{
-				if(player.x > i*BlockSize + BlockSize || player.y > j*BlockSize + BlockSize || player.x2 < i*BlockSize || player.y2 < j*BlockSize)
+				if(player.getX() > i*BlockSize + BlockSize || player.getY() > j*BlockSize + BlockSize || 
+					player.getX2() < i*BlockSize || player.getY2() < j*BlockSize)
 				{
-					//No Collsion
-					player.Platform = false;
+					
 				}
-				else
+				else 
 				{
 					int level = map.getLevel();
 					level ++;
 					map.setLevel(level);
-					if(level >2)
+					if(level > 2)
 					{
 						map.setLevel(0);
 					}
-					player.x = player.origX;
-					player.y = player.origY;
-					clear_to_color(screen, makecol(0,0,0));
+					player.setX(player.getOrigX());
+					player.setY(player.getOrigY());
+					clear_to_color(screen, makecol(0, 0, 0));
 					rest(1000);
 				}
 			}
