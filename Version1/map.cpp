@@ -25,7 +25,7 @@ void Map::Update()
 
 }
 
-void Map::Draw(BITMAP *Buffer)
+void Map::Draw(BITMAP *Buffer, BITMAP *Brick, BITMAP *Floor, BITMAP *Floor2, BITMAP *Floor3)
 {
     for (int i = 0; i < mapSizeX[level]; i++)
     {
@@ -33,21 +33,36 @@ void Map::Draw(BITMAP *Buffer)
         {
             if (MapFile[level][i][j] == 1)
             {
-                rectfill(Buffer, i*BlockSize, j*BlockSize, i*BlockSize + BlockSize, j*BlockSize + BlockSize, makecol(0, 255, 255));
+                rectfill(Buffer, i*BlockSize, j*BlockSize, i*BlockSize + BlockSize, j*BlockSize + BlockSize, makecol(135, 206, 235));
             }
             else if (MapFile[level][i][j] == 2)
             {
-                rectfill(Buffer, i*BlockSize, j*BlockSize, i*BlockSize + BlockSize, j*BlockSize + BlockSize, makecol(0, 255,0));
+                acquire_screen();
+				draw_sprite(Buffer, Floor2, i*BlockSize, j*BlockSize);
+				release_screen();
             }
 			else if (MapFile[level][i][j] == 3)
 			{
-			    rectfill(Buffer, i*BlockSize, j*BlockSize, i*BlockSize + BlockSize, j*BlockSize + BlockSize, makecol(255, 0 ,0));
+				acquire_screen();
+				draw_sprite(Buffer, Brick, i*BlockSize, j*BlockSize);
+				release_screen();
+			    
 			}
 			else if (MapFile[level][i][j] == 4)
 			{
-			    rectfill(Buffer, i*BlockSize, j*BlockSize, i*BlockSize + BlockSize, j*BlockSize + BlockSize, makecol(255, 255 ,0));
+			    acquire_screen();
+				draw_sprite(Buffer, Floor3, i*BlockSize, j*BlockSize);
+				release_screen();
 			}
-        }
+
+			else if (MapFile[level][i][j] == 5)
+			{
+			    acquire_screen();
+				draw_sprite(Buffer, Floor, i*BlockSize, j*BlockSize);
+				release_screen();
+			}
+
+		}
     }
 }
 

@@ -24,7 +24,7 @@ class Map
 
         void Init();
         void Update();
-        void Draw(BITMAP *Buffer);
+        void Draw(BITMAP *Buffer, BITMAP *Brick, BITMAP *Floor, BITMAP *Floor2, BITMAP *Floor3);
 		void LoadMap(const char*filename, int level);
 		int getLevel();
 		void setLevel(int value);

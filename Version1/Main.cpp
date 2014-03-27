@@ -49,7 +49,16 @@ int main(){
 	BITMAP *Sprite;
 	Sprite = load_bitmap( "first.bmp", NULL);
 	BITMAP *Enemy;
-	Enemy = load_bitmap( "rage.bmp", NULL);
+	Enemy = load_bitmap( "test2.bmp", NULL);
+	BITMAP *Brick;
+	Brick = load_bitmap( "brick.bmp", NULL);
+	BITMAP *Floor;
+	Floor = load_bitmap( "floor.bmp", NULL);
+	BITMAP *Floor2;
+	Floor2 = load_bitmap( "floor2.bmp", NULL);
+	BITMAP *Floor3;
+	Floor3 = load_bitmap( "floor3.bmp", NULL);
+
 	bool done = false;
 
 	while (!done)
@@ -71,7 +80,7 @@ int main(){
 		}
 
 		//Draw
-		map.Draw(Buffer);
+		map.Draw(Buffer, Brick, Floor, Floor2, Floor3);
 		player.Draw(Buffer, Sprite);
 		enemy.Draw(Buffer, Enemy, map.getLevel());
 		camera.Draw(Buffer);
