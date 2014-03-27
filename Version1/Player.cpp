@@ -15,9 +15,9 @@ Player::~Player()
 void Player::Init()
 {
 	lives = 3;
-	width = 31;
+	width = 20;
 	height = 31;
-	x = 31;
+	x = 20;
 	y = (ScreenHeight - width)/2;
 	origX = x;
 	origY = y;
