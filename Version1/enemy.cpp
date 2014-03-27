@@ -158,3 +158,8 @@ int Enemy::getY2(int index)
 {
 	return y[index] + height[index];
 }
+
+int Enemy::getLevel(int index)
+{
+	return level[index];
+}

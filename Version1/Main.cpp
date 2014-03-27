@@ -46,6 +46,8 @@ int main(){
 	collision.Init();
 
 	BITMAP *Buffer = create_bitmap (6000, 600);
+	BITMAP *Sprite;
+	Sprite = load_bitmap( "first.bmp", NULL);
 
 	bool done = false;
 
@@ -69,7 +71,7 @@ int main(){
 
 		//Draw
 		map.Draw(Buffer);
-		player.Draw(Buffer);
+		player.Draw(Buffer, Sprite);
 		enemy.Draw(Buffer, map.getLevel());
 		camera.Draw(Buffer);
 		clear_bitmap(Buffer);

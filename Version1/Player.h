@@ -16,6 +16,7 @@ private:
         int gravity;
         bool Jump, Platform;
 		int lives;
+		int a, b;
     public:
         Player();
         ~Player();
@@ -23,7 +24,7 @@ private:
         void Init();
 		// Changed
         void Update();
-        void Draw(BITMAP *Buffer);
+        void Draw(BITMAP *Buffer, BITMAP *Sprite);
 
         void Controls();
         void SetPosition();
@@ -32,6 +33,8 @@ private:
 		int getY(); 
 		int getX2(); 
 		int getY2(); 
+		int getA();
+		int getB();
 		int getSpeed(); 
 		int getGravity();
 		int getVDirection();

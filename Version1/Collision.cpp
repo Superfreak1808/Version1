@@ -79,8 +79,8 @@ void Collision::PlatformCollision(BITMAP *Buffer, Player &player, Map &map)
 				{
 					if(player.getVDirection() == 2 && player.getY() - player.getVelY() <= j*BlockSize)
 					{
-						player.setY(j*BlockSize - 10);
-						player.setY2(player.getY() + 10);
+						player.setY(j*BlockSize - 31);
+						player.setY2(player.getY() + 31);
 						player.setVelY(0);
 						player.setPlatform(true);
 						player.setJump(true);
@@ -88,7 +88,7 @@ void Collision::PlatformCollision(BITMAP *Buffer, Player &player, Map &map)
 					else if (player.getVDirection() == 1)
 					{
 						player.setY(player.getY() + player.getSpeed()*2);
-						player.setY2(player.getY() + 10); 
+						player.setY2(player.getY() + 31); 
 						player.setVelY(0); 
 						player.setPlatform(false);
 						player.setJump(false);
@@ -96,12 +96,12 @@ void Collision::PlatformCollision(BITMAP *Buffer, Player &player, Map &map)
 					if (player.getHDirection() == 1 && player.getPlatform() == false)
 					{
 						player.setX(player.getX() - player.getSpeed()); 
-						player.setX2(player.getX() + 10); 
+						player.setX2(player.getX() + 31); 
 					}
 					else if (player.getHDirection() == 2 && player.getPlatform() == false)
 					{
 						player.setX(player.getX() + player.getSpeed()); 
-						player.setX2(player.getX() + 10);
+						player.setX2(player.getX() + 31);
 					}
 				}
 			}

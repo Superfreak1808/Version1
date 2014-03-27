@@ -37,6 +37,8 @@ public:
 	int getY(int index);
 	int getX2(int index);
 	int getY2(int index);
+	int getLevel(int index);
+
 };
 
 #endif

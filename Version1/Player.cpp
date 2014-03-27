@@ -15,16 +15,16 @@ Player::~Player()
 void Player::Init()
 {
 	lives = 3;
-	width = 10;
-	height = 10;
-	x = 10;
+	width = 31;
+	height = 31;
+	x = 31;
 	y = (ScreenHeight - width)/2;
 	origX = x;
 	origY = y;
 	velx = 0;
 	vely = 0;
-	x2 = x + 10;
-	y2 = y + 10;
+	x2 = x + 31;
+	y2 = y + 31;
 	speed = 2;
 	gravity = 1;
 	Jump = Platform = false;
@@ -39,9 +39,13 @@ void Player::Update()
 	Player::SetPosition();
 }
 
-void Player::Draw(BITMAP* Buffer)
+void Player::Draw(BITMAP* Buffer, BITMAP* Sprite)
 {
-	rectfill (Buffer, x, y, x2, y2, makecol(255,0,0));
+
+	acquire_screen();
+    draw_sprite(Buffer, Sprite, x, y);
+    release_screen();
+
 }
 
 void Player::Controls()

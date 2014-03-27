@@ -34,7 +34,7 @@ public:
 	void LoadCollisionMap(const char*filename, int level);
 	void LevelEnd(Player &player, Map &map);
 	void PlatformCollision(BITMAP *Buffer, Player &player, Map &map);
-	void EPCollision(Player &player, Enemy &enemy);
+	void EPCollision(Player &player, Enemy &enemy, Map &map);
 
 };
 
