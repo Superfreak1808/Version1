@@ -16,12 +16,13 @@ using namespace std;
 class Collision
 {
 private:
-	int loadCounterX;
-	int loadCounterY;
-	int mapSizeX;
-	int mapSizeY;
-	int ColMapFile[3][100][100];
-	string line;
+        int loadCounterX;
+        int loadCounterY;
+        int mapSizeX[3];
+        int mapSizeY[3];
+        int ColMapFile[3][100][100];
+		int level;
+		string line;
 
 public:
 	Collision();
@@ -35,7 +36,7 @@ public:
 	void LevelEnd(Player &player, Map &map);
 	void PlatformCollision(BITMAP *Buffer, Player &player, Map &map);
 	void EPCollision(Player &player, Enemy &enemy, Map &map);
+	void Boundaries(Player &player, Map &map);
 
 };
-
 #endif
