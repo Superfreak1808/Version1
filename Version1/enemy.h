@@ -27,7 +27,7 @@ public:
 
 	void Init();
 	void Update(int level);
-	void Draw(BITMAP *Buffer, int level);
+	void Draw(BITMAP *Buffer, BITMAP *Enemy, int level);
 
 	void LoadEnemies(const char*filename);
 	void Move(int level);

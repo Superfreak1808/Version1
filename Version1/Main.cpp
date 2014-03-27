@@ -48,7 +48,8 @@ int main(){
 	BITMAP *Buffer = create_bitmap (6000, 600);
 	BITMAP *Sprite;
 	Sprite = load_bitmap( "first.bmp", NULL);
-
+	BITMAP *Enemy;
+	Enemy = load_bitmap( "rage.bmp", NULL);
 	bool done = false;
 
 	while (!done)
@@ -72,7 +73,7 @@ int main(){
 		//Draw
 		map.Draw(Buffer);
 		player.Draw(Buffer, Sprite);
-		enemy.Draw(Buffer, map.getLevel());
+		enemy.Draw(Buffer, Enemy, map.getLevel());
 		camera.Draw(Buffer);
 		clear_bitmap(Buffer);
 	}

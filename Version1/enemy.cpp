@@ -39,13 +39,15 @@ void Enemy::Update(int level)
     Enemy::Move(level);
 }
  
-void Enemy::Draw(BITMAP *Buffer, int level)
+void Enemy::Draw(BITMAP *Buffer, BITMAP *Enemy, int level)
 {
     for(int i = 0; i < amountOfEnemies; i++)
     {
         if(this->level[i] == level)
 		{
-            rectfill(Buffer, x[i], y[i], x[i] + width[i], y[i] + height[i], makecol(0, 0, 255));
+			acquire_screen();
+			draw_sprite(Buffer, Enemy, x[i] + width[i], y[i] + height[i]);
+			release_screen();
 		}
     }
 }

@@ -28,7 +28,7 @@ void Player::Init()
 	speed = 2;
 	gravity = 1;
 	Jump = Platform = false;
-	jumpspeed = -15;
+	jumpspeed = -20;
 	hDir = 0;
 	vDir = 2;
 }
