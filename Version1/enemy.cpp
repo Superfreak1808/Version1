@@ -49,7 +49,7 @@ void Enemy::Draw(BITMAP *Buffer, BITMAP *Enemy, int level)
 			draw_sprite(Buffer, Enemy, x[i] , y[i]);
 			release_screen();
 
-			d
+		
 		}
     }
 }

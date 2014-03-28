@@ -125,6 +125,7 @@ void Collision::EPCollision(Player &player, Enemy &enemy, Map& map)
 			{
 				// Player Dies(loses a life)
 				player.setLives(player.getLives()-1);
+				player.setX(player.getX()-75 );
 			}
 		}
 	}
