@@ -25,7 +25,7 @@ void Map::Update()
 
 }
 
-void Map::Draw(BITMAP *Buffer, BITMAP *Brick, BITMAP *Floor, BITMAP *Floor2, BITMAP *Floor3)
+void Map::Draw(BITMAP *Buffer, BITMAP *Brick, BITMAP *Floor, BITMAP *Floor2, BITMAP *Floor3, BITMAP *Cloud)
 {
     for (int i = 0; i < mapSizeX[level]; i++)
     {
@@ -63,7 +63,16 @@ void Map::Draw(BITMAP *Buffer, BITMAP *Brick, BITMAP *Floor, BITMAP *Floor2, BIT
 			}
 
 		}
-    }
+	}
+
+
+	for (int k = 10; k < 2400; (k = k+300) )
+	{
+				acquire_screen();
+				draw_sprite(Buffer, Cloud, k, 10);
+				release_screen();
+	}
+
 }
 
 void Map::LoadMap(const char *filename, int level)

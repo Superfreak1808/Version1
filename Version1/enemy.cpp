@@ -46,8 +46,10 @@ void Enemy::Draw(BITMAP *Buffer, BITMAP *Enemy, int level)
         if(this->level[i] == level)
 		{
 			acquire_screen();
-			draw_sprite(Buffer, Enemy, x[i] + width[i], y[i] + height[i]);
+			draw_sprite(Buffer, Enemy, x[i] , y[i]);
 			release_screen();
+
+			d
 		}
     }
 }

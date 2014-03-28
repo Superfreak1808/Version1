@@ -58,6 +58,8 @@ int main(){
 	Floor2 = load_bitmap( "floor2.bmp", NULL);
 	BITMAP *Floor3;
 	Floor3 = load_bitmap( "floor3.bmp", NULL);
+	BITMAP *Cloud;
+	Cloud = load_bitmap( "cloud.bmp", NULL);
 
 	bool done = false;
 
@@ -80,9 +82,12 @@ int main(){
 		}
 
 		//Draw
-		map.Draw(Buffer, Brick, Floor, Floor2, Floor3);
+		map.Draw(Buffer, Brick, Floor, Floor2, Floor3, Cloud);
 		player.Draw(Buffer, Sprite);
 		enemy.Draw(Buffer, Enemy, map.getLevel());
+		stringstream str;
+		str << player.getLives();
+		textout_ex(Buffer, font, str.str().c_str(), 10, 10, makecol(255,0,0), -1);
 		camera.Draw(Buffer);
 		clear_bitmap(Buffer);
 	}
